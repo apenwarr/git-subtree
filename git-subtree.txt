@@ -18,9 +18,18 @@ SYNOPSIS
 
 DESCRIPTION
 -----------
-Subtrees allow subprojects to be included within a subdirectory
-of the main project, optionally including the subproject's
-entire history.
+git subtree allows you to include a subproject in your
+own repository as a subdirectory, optionally including the
+subproject's entire history. For example, you could
+include the source code for a library as a subdirectory of your
+application.
+
+You can also extract the entire history of a subdirectory from
+your project and make it into a standalone project.  For
+example, if a library you made for one application ends up being
+useful elsewhere, you can extract its entire history and publish
+that as its own git repository, without accidentally
+intermingling the history of your application project.
 
 For example, you could include the source code for a library
 as a subdirectory of your application.
