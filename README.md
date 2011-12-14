@@ -1,8 +1,39 @@
+# git-subtree
 
-Please read git-subtree.txt for documentation.
+git-subtree allows subprojects to be included within a sub-directory of a main project, optionally including the sub-project's entire history.
 
-Please don't contact me using github mail; it's slow, ugly, and worst of
-all, redundant. Email me instead at apenwarr@gmail.com and I'll be happy to
-help.
+## Installation
 
-Avery
+Choose **one** of the following ways to install git-subtree:
+
+1. Copy the file `git-subtree.sh` to where all other git scripts are stored.
+1. Run `install.sh` in a Git-enabled shell.
+1. Run `make install` in a Cygwin-enabled shell.
+
+Any *one* of these actions makes the `git subtree` command available (note: space instead of dash).
+
+To additionally install the man page:
+
+    make doc
+    cp git-subtree.1 /usr/share/man/man1/
+
+
+## Usage
+
+See `git-subtree.txt` for details.
+
+## Known issues
+
+See `todo`.
+
+## License
+
+You may use this software under the terms of the GNU General Public License (GPL), Version 2.
+
+See `COPYING`.
+
+## Credits
+
+Originally authored by Avery Pennarun, <http://apenwarr.ca/log>
+
+Please do not contact the author using github mail. Instead, <mailto:apenwarr@gmail.com>
