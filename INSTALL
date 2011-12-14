@@ -16,7 +16,7 @@ make install
 That will make a 'git subtree' (note: space instead of dash) command
 available.  See the file git-subtree.txt for more.
 
-You can also install the man page by doing:
+You can also install the man page by doing (requires asciidoc):
 
 	make doc
 	cp git-subtree.1 /usr/share/man/man1/
