@@ -7,7 +7,7 @@ git-subtree allows subprojects to be included within a sub-directory of a main p
 Choose **one** of the following ways to install git-subtree:
 
 1. Copy the file `git-subtree.sh` to where all other git scripts are stored.
-1. Run `install.sh` in a Git-enabled shell.
+1. Run `install.sh` in a Git-enabled shell (that's "Git Bash" on Windows).
 1. Run `make install` in a Cygwin-enabled shell.
 
 Any *one* of these actions makes the `git subtree` command available (note: space instead of dash).
