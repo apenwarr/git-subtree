@@ -254,6 +254,11 @@ OPTIONS FOR split
 	'--rejoin' when you split, because you don't want the
 	subproject's history to be part of your project anyway.
 
+OPTIONS FOR push
+----------------
+-f::
+--force::
+    Uses 'git push --force'.
 
 EXAMPLE 1. Add command
 ----------------------
