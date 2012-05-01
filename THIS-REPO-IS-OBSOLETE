@@ -1,0 +1,11 @@
+Hi,
+
+This git-subtree repository is obsolete now that git-subtree has been merged
+into mainline git (yay!).  If you have patches you want to make to
+git-subtree, I encourage you to email them to the core git mailing list,
+where the hordes of awesome maintainers are well known for responding very
+quickly to queries and patches, very much unlike me.
+
+Thanks!
+
+Avery
