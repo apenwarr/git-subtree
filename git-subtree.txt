@@ -377,6 +377,7 @@ achieve an identical history, we checkout the upstream master into 'library',
 merge the history of 'split' into it, and push the result upstream:
 
   $ git remote add vendor git@github.com:vendor/library.git
+  $ git fetch vendor
   $ git checkout -b library vendor/master
   $ git merge split
   $ git push vendor library:master
