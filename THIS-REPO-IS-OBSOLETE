@@ -6,6 +6,11 @@ git-subtree, I encourage you to email them to the core git mailing list,
 where the hordes of awesome maintainers are well known for responding very
 quickly to queries and patches, very much unlike me.
 
+Note: it is only available in git 1.7.11 and higher.  Also, it's in the
+"contrib" subtree for now, so it's not installed by default.  Please
+encourage your distribution packager (eg. Debian) to include contrib
+when making their git packages.
+
 Thanks!
 
 Avery
