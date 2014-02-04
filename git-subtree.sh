@@ -119,7 +119,7 @@ esac
 dir="$(dirname "$prefix/.")"
 
 if [ "$command" != "pull" -a "$command" != "add" -a "$command" != "push" ]; then
-	revs=$(git rev-parse $default --revs-only "$@") || exit $?
+	revs="$(git rev-parse $default --revs-only "$@")^{}" || exit $?
 	dirs="$(git rev-parse --no-revs --no-flags "$@")" || exit $?
 	if [ -n "$dirs" ]; then
 		die "Error: Use --prefix instead of bare filenames."
@@ -519,7 +519,7 @@ cmd_add_repository()
 
 cmd_add_commit()
 {
-	revs=$(git rev-parse $default --revs-only "$@") || exit $?
+	revs="$(git rev-parse $default --revs-only "$@")^{}" || exit $?
 	set -- $revs
 	rev="$1"
 	
@@ -580,7 +580,8 @@ cmd_split()
 	eval "$grl" |
 	while read rev parents; do
 		revcount=$(($revcount + 1))
-		say -n "$revcount/$revmax ($createcount)"
+		say -n "$revcount/$revmax ($createcount)
+"
 		debug "Processing commit: $rev"
 		exists=$(cache_get $rev)
 		if [ -n "$exists" ]; then
@@ -643,7 +644,7 @@ cmd_split()
 
 cmd_merge()
 {
-	revs=$(git rev-parse $default --revs-only "$@") || exit $?
+	revs="$(git rev-parse $default --revs-only "$@")^{}" || exit $?
 	ensure_clean
 	
 	set -- $revs
