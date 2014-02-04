@@ -338,5 +338,43 @@ git log --pretty=format:'commit: %H' | joincommits |
 	check_equal "$x" 1
 ) || exit 1
 
+# Return to mainline
+cd ../..
+
+
+# from-submodule
+
+make_submodule()
+{
+	cd ..
+	local prefix=$1
+
+	local submodule_path=$(mktemp -d submodule.XXX)
+	cd $submodule_path
+	local submodule_abs_path=$(pwd)
+
+	git init > /dev/null
+	create "sub-file"
+	git commit -m "sub-commit" > /dev/null
+	local submodule_sha=$(git rev-parse HEAD)
+	cd ../mainline
+
+	git submodule add $submodule_abs_path $prefix > /dev/null
+	git submodule update --init > /dev/null
+	git commit -m "Added $prefix." > /dev/null
+
+	echo $submodule_sha
+}
+
+subA_sha=$(make_submodule submodules/subA)
+
+git subtree from-submodule --prefix submodules/subA
+
+check_equal "$(last_commit_message)" "Add 'submodules/subA/' from commit '${subA_sha}'"
+# Submodule should be gone.
+check_equal "$(git submodule status)" ""
+
+rm -rf ../submodule.*
+
 echo
 echo 'ok'
