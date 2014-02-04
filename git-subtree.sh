@@ -25,6 +25,8 @@ b,branch=     create a new branch from the split subtree
 ignore-joins  ignore prior --rejoin commits
 onto=         try connecting new tree to an existing one
 rejoin        merge the new branch back into HEAD
+ options for 'push'
+f,force       use force push
  options for 'add', 'merge', 'pull' and 'push'
 squash        merge subtree changes as a single commit
 "
@@ -83,6 +85,7 @@ while [ $# -gt 0 ]; do
 		-b) branch="$1"; shift ;;
 		-P) prefix="$1"; shift ;;
 		-m) message="$1"; shift ;;
+        -f|--force) force=1 ;;
 		--no-prefix) prefix= ;;
 		--onto) onto="$1"; shift ;;
 		--no-onto) onto= ;;
@@ -700,10 +703,14 @@ cmd_push()
 	    die "You must provide <repository> <refspec>"
 	fi
 	if [ -e "$dir" ]; then
+        push_opts=
+        if [ "$force" == "1" ]; then 
+            push_opts="$push_opts --force"
+        fi
 	    repository=$1
 	    refspec=$2
 	    echo "git push using: " $repository $refspec
-	    git push $repository $(git subtree split --prefix=$prefix):refs/heads/$refspec
+	    git push $push_opts $repository $(git subtree split --prefix=$prefix):refs/heads/$refspec
 	else
 	    die "'$dir' must already exist. Try 'git subtree add'."
 	fi
