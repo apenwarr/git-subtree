@@ -269,7 +269,7 @@ git-extensions repository in ~/git-extensions/:
 name
 
 You can omit the --squash flag, but doing so will increase the number
-of commits that are incldued in your local repository.
+of commits that are included in your local repository.
 
 We now have a ~/git-extensions/git-subtree directory containing code
 from the master branch of git://github.com/apenwarr/git-subtree.git
@@ -354,6 +354,44 @@ Back in your original directory:
 Then push the new branch onto the new empty repository:
 
 	$ git push <new-repo> split:master
+
+
+EXAMPLE 4. Re-integrate an already extracted subtree
+----------------------------------------------------
+Suppose you have extracted a sub-directory containing a library into an own
+repository through other means (without git-subtree) already, but it still
+exists in your mainline/original repository.  Here's how you re-integrate
+that back into your source/mainline:
+
+Let's assume that 'master' is our mainline branch in the original repo,
+containing the library in the lib/ sub-directory, which we want to split into
+a new 'class' branch and rejoin afterwards.
+
+First, split the local library into an own branch:
+
+  $ git checkout master
+  $ git subtree split --prefix=lib --rejoin -b split
+
+Second, add the library's existing upstream repo as remote 'vendor'.  To
+achieve an identical history, we checkout the upstream master into 'library',
+merge the history of 'split' into it, and push the result upstream:
+
+  $ git remote add vendor git@github.com:vendor/library.git
+  $ git fetch vendor
+  $ git checkout -b library vendor/master
+  $ git merge split
+  $ git push vendor library:master
+
+Third, merge any upstream library changes into your mainline:
+
+  $ git checkout master
+  $ git subtree merge --prefix=lib library
+  $ git push origin master
+
+To push changes in your local library to the vendor repo in the future, it's
+as simple as:
+
+  $ git subtree push --prefix=lib vendor master
 
 
 AUTHOR
